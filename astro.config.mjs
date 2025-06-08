@@ -5,7 +5,7 @@ import { defineConfig, envField } from "astro/config";
 export default defineConfig({
   env: {
     schema: {
-      OPEN_AI_APIK_KEY: envField.string({
+      OPEN_AI_API_KEY: envField.string({
         context: "server",
         access: "secret",
       }),
