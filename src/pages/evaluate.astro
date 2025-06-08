@@ -1,9 +1,12 @@
 ---
 import EvaluationResult from "../components/EvaluationResult.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<section class="evaluator-section">
-  <output class="evaluator-result" aria-live="polite">
-    <EvaluationResult server:defer />
-  </output>
-</section>
+<Layout>
+  <section class="evaluator-section">
+    <output class="evaluator-result" aria-live="polite">
+      <EvaluationResult server:defer />
+    </output>
+  </section>
+</Layout>
