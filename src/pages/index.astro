@@ -1,27 +1,78 @@
 ---
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <h1 class="text-red-600 dark:text-green-500">AI Evaluator</h1>
-  <form data-ref="evaluator__form">
-    <label
-      >Project Name:
-      <input type="text" name="storeName" required />
-    </label>
+  <main class="grid place-items-center">
+    <div class="container mx-auto px-4">
+      <article class="prose lg:prose-xl dark:prose-invert mb-8">
+        <h2>How it works:</h2>
+        <ul>
+          <li>
+            Enter your project name and upload all related proposal documents
+            (PDF, Word, etc).
+          </li>
+          <li>
+            The AI will compare each proposal using technical and qualitative
+            criteria.
+          </li>
+          <li>
+            You’ll receive a clear, structured evaluation with an executive
+            summary and a detailed breakdown for each proposal.
+          </li>
+        </ul>
+      </article>
 
-    <label
-      >Upload Files:
-      <input type="file" name="documents" multiple required />
-    </label>
+      <form
+        data-ref="evaluator__form"
+        class="bg-white/80 dark:bg-stone-900/80 p-8 rounded-2xl shadow-lg border border-stone-200 dark:border-stone-700"
+      >
+        <label class="block mb-8 font-semibold">
+          Project Name:
+          <input
+            type="text"
+            name="storeName"
+            placeholder="Lunar Skyscraper"
+            required
+            class="w-full mt-4 px-4 py-2 rounded-lg border border-stone-300 bg-stone-50
+						 dark:border-stone-700 dark:bg-stone-800
+						 placeholder:text-stone-400 dark:placeholder:text-stone-500
+						 focus:outline-none focus:ring focus:ring-blue-400 focus:rounded"
+          />
+        </label>
 
-    <progress max="100" value="0" data-ref="evaluator__upload-progress"
-    ></progress>
+        <label class="block mb-4 font-semibold">
+          Upload Files:
+          <input
+            type="file"
+            name="documents"
+            multiple
+            required
+            class="file:bg-pink-500 file:text-white file:font-semibold file:px-4 file:py-2 file:rounded-lg file:border-0 file:mr-4"
+          />
+        </label>
 
-    <button type="submit">Evaluate</button>
-  </form>
+        <progress
+          max="100"
+          value="0"
+          data-ref="evaluator__upload-progress"
+          class="w-full h-3 mb-8 border-1 rounded-2xl
+					border-stone-300 dark:border-stone-700
+					[&::-webkit-progress-bar]:bg-transparent
+					[&::-webkit-progress-bar]:rounded
+					[&::-webkit-progress-bar]:shadow-[inset_0_2px_5px_rgba(0,0,0,0.25)]
+					[&::-webkit-progress-value]:bg-pink-500"
+        ></progress>
+
+        <button
+          type="submit"
+          class="w-full py-3 rounded-lg text-white bg-pink-500 hover:bg-pink-600 font-bold text-lg transition active:scale-95"
+        >
+          Evaluate
+        </button>
+      </form>
+    </div>
+  </main>
 </Layout>
 <script type="module">
   const form = document.querySelector(`[data-ref="evaluator__form"]`);
