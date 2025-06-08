@@ -12,7 +12,7 @@
   </head>
   <body>
     <h1>Astro</h1>
-    <form class="evaluator__form">
+    <form data-ref="evaluator__form">
       <label
         >Project Name:
         <input type="text" name="storeName" required />
@@ -23,7 +23,7 @@
         <input type="file" name="documents" multiple required />
       </label>
 
-      <progress max="100" value="0" class="evaluator__upload-progress"
+      <progress max="100" value="0" data-ref="evaluator__upload-progress"
       ></progress>
 
       <button type="submit">Evaluate</button>
@@ -31,13 +31,12 @@
   </body>
 </html>
 <script type="module">
-  const form = document.querySelector(".evaluator__form");
-  const progressBar = form.querySelector(".evaluator__upload-progress");
+  const form = document.querySelector(`[data-ref="evaluator__form"]`);
 
-  form?.addEventListener("submit", async (event) => {
-    event.preventDefault();
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    const { storeName, documents } = event.target;
+    const { storeName, documents } = e.target;
 
     const formData = new FormData();
     formData.append("storeName", storeName.value);
@@ -46,14 +45,20 @@
       formData.append("files", file);
     }
 
-    progressBar?.value = 0;
+    const progressBar = form.querySelector(
+      `[data-ref="evaluator__upload-progress"]`
+    );
+
+    if (progressBar) {
+      progressBar.value = 0;
+    }
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/upload");
 
     xhr.upload.addEventListener("progress", (event) => {
-      if (event.lengthComputable) {
-        progressBar?.value = (event.loaded / event.total) * 100;
+      if (event.lengthComputable && progressBar) {
+        progressBar.value = (event.loaded / event.total) * 100;
       }
     });
 
