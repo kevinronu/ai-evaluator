@@ -23,41 +23,56 @@
         <input type="file" name="documents" multiple required />
       </label>
 
+      <progress max="100" value="0" class="evaluator__upload-progress"
+      ></progress>
+
       <button type="submit">Evaluate</button>
     </form>
   </body>
 </html>
 <script type="module">
-  const formElement = document.querySelector(".evaluator__form");
+  const form = document.querySelector(".evaluator__form");
+  const progressBar = form.querySelector(".evaluator__upload-progress");
 
-  formElement?.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-    const { storeName, documents } = e.target;
+    const { storeName, documents } = event.target;
 
     const formData = new FormData();
-
     formData.append("storeName", storeName.value);
 
-    const fileList = documents.files;
-
-    for (const file of fileList) {
+    for (const file of documents.files) {
       formData.append("files", file);
     }
 
-    const response = await fetch("/api/upload", {
-      method: "POST",
-      body: formData,
+    progressBar?.value = 0;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/upload");
+
+    xhr.upload.addEventListener("progress", (event) => {
+      if (event.lengthComputable) {
+        progressBar?.value = (event.loaded / event.total) * 100;
+      }
     });
 
-    const result = await response.json();
+    xhr.onload = () => {
+      const result = JSON.parse(xhr.responseText);
 
-    const params = new URLSearchParams({
-      projectName: result.vector_store_name,
-      storeID: result.vector_store_id,
-      language: `Spanish`,
-    });
+      const params = new URLSearchParams({
+        projectName: result.vector_store_name,
+        storeID: result.vector_store_id,
+        language: `Spanish`,
+      });
 
-    window.location.href = `/evaluate?${params.toString()}`;
+      window.location.href = `/evaluate?${params.toString()}`;
+    };
+
+    xhr.onerror = () => {
+      alert("Upload failed.");
+    };
+
+    xhr.send(formData);
   });
 </script>
