@@ -12,19 +12,52 @@
   </head>
   <body>
     <h1>Astro</h1>
-    <button type="button" class="evaluator-button">Evaluate Proposal</button>
+    <form class="evaluator__form">
+      <label
+        >Project Name:
+        <input type="text" name="storeName" required />
+      </label>
+
+      <label
+        >Upload Files:
+        <input type="file" name="documents" multiple required />
+      </label>
+
+      <button type="submit">Evaluate</button>
+    </form>
   </body>
 </html>
 <script type="module">
-  const button = document.querySelector(".evaluator-button");
+  const formElement = document.querySelector(".evaluator__form");
 
-  const params = new URLSearchParams({
-    projectName: `Nueva Esperanza`,
-    storeID: `vs_6843aa29fbec8191967e735079ef3c8a`,
-    language: `Spanish`,
-  });
+  formElement?.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  button?.addEventListener("click", async () => {
+    const { storeName, documents } = e.target;
+
+    const formData = new FormData();
+
+    formData.append("storeName", storeName.value);
+
+    const fileList = documents.files;
+
+    for (const file of fileList) {
+      formData.append("files", file);
+    }
+
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await response.json();
+
+    const params = new URLSearchParams({
+      projectName: result.vector_store_name,
+      storeID: result.vector_store_id,
+      language: `Spanish`,
+    });
+
     window.location.href = `/evaluate?${params.toString()}`;
   });
 </script>
