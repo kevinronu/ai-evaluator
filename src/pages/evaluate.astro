@@ -4,9 +4,7 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <section class="evaluator-section">
-    <output class="evaluator-result" aria-live="polite">
-      <EvaluationResult server:defer />
-    </output>
-  </section>
+  <main>
+    <EvaluationResult server:defer />
+  </main>
 </Layout>

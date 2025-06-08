@@ -1,95 +1,137 @@
 ---
-import { getEvaluation } from "../lib/openai/evaluation";
+// import { getEvaluation } from "../lib/openai/evaluation";
+// import type { Evaluation } from "../lib/openai/structured-output";
+
+// const referer = Astro.request.headers.get("Referer");
+
+// let evaluation: Evaluation | null = null;
+
+// if (referer) {
+//   const url = new URL(referer);
+//   const projectName = url.searchParams.get("projectName");
+//   const storeID = url.searchParams.get("storeID");
+//   const language = url.searchParams.get("language");
+
+//   if (projectName && storeID && language) {
+//     try {
+//       evaluation = await getEvaluation(projectName, storeID, language);
+//     } catch (error) {
+//       console.error("Evaluation fetch error:", error);
+//     }
+//   }
+// }
+
+// export const prerender = false;
+
+import evaluationData from "./r.json";
 import type { Evaluation } from "../lib/openai/structured-output";
 
-const referer = Astro.request.headers.get("Referer");
-
-let evaluation: Evaluation | null = null;
-
-if (referer) {
-  const url = new URL(referer);
-  const projectName = url.searchParams.get("projectName");
-  const storeID = url.searchParams.get("storeID");
-  const language = url.searchParams.get("language");
-
-  if (projectName && storeID && language) {
-    try {
-      evaluation = await getEvaluation(projectName, storeID, language);
-    } catch (error) {
-      console.error("Evaluation fetch error:", error);
-    }
-  }
-}
-
-export const prerender = false;
+const evaluation: Evaluation = evaluationData;
 ---
 
-<section class="evaluation-result">
-  {
-    evaluation ? (
-      <>
-        <h2>Executive Summary</h2>
-        <p>
-          <strong>Best Proposal:</strong>{" "}
-          {evaluation.executive_summary.best_proposal_id}
-        </p>
-        <p>
-          <strong>Project Type:</strong>{" "}
-          {evaluation.executive_summary.project_type}
-        </p>
-        <p>
-          <strong>Summary:</strong> {evaluation.executive_summary.summary}
-        </p>
-        <p>
-          <strong>Reasoning:</strong> {evaluation.executive_summary.reasoning}
-        </p>
-        <p>
-          <strong>Top Candidates:</strong>{" "}
-          {evaluation.executive_summary.top_candidates.join(", ")}
-        </p>
-        <p>
-          <strong>Total Evaluated:</strong>{" "}
-          {evaluation.executive_summary.total_proposals_evaluated}
-        </p>
+{
+  evaluation && (
+    <article class="container mx-auto px-4 max-w-4xl prose dark:prose-invert prose-headings:text-pink-600 prose-a:text-blue-600 prose-table:rounded-xl prose-table:overflow-hidden">
+      <h2 class="mb-2 text-center">Executive Summary</h2>
+      <section aria-label="Executive Stats" class="mb-8 grid grid-cols-4 gap-4">
+        <article
+          class="bg-pink-50/70 dark:bg-pink-950/50 shadow rounded-lg p-4 text-center"
+          aria-label="Project Type"
+        >
+          <h4 class="uppercase mb-1">Project Type</h4>
+          <p class="" aria-label="Project Type">
+            {evaluation.executive_summary.project_type}
+          </p>
+        </article>
+        <article
+          class="bg-pink-50/70 dark:bg-pink-950/50 shadow rounded-lg p-4 text-center"
+          aria-label="Best Proposal"
+        >
+          <h4 class="uppercase mb-1">Best Proposal</h4>
+          <p aria-label="Best Proposal ID">
+            {evaluation.executive_summary.best_proposal_id}
+          </p>
+        </article>
+        <article
+          class="bg-pink-50/70 dark:bg-pink-950/50 shadow rounded-lg p-4 text-center"
+          aria-label="Top Candidates"
+        >
+          <h4 class="uppercase mb-1">Top Candidates</h4>
+          <ol>
+            {evaluation.executive_summary.top_candidates.map((c) => (
+              <li class="not-prose">{c}</li>
+            ))}
+          </ol>
+        </article>
+        <article
+          class="bg-pink-50/70 dark:bg-pink-950/50 shadow rounded-lg p-4 text-center"
+          aria-label="Total Evaluated"
+        >
+          <h4 class="uppercase mb-1">Evaluated</h4>
+          <p aria-label="Total Evaluated">
+            {evaluation.executive_summary.total_proposals_evaluated}
+          </p>
+        </article>
+      </section>
+      <section class="grid md:grid-cols-2 gap-6 mb-8">
+        <section class="rounded-xl bg-stone-100/90 dark:bg-stone-800/80 shadow p-5">
+          <header>
+            <h3>Summary</h3>
+          </header>
+          <p class="text-stone-700 dark:text-stone-300">
+            {evaluation.executive_summary.summary}
+          </p>
+        </section>
 
-        <h3>Proposal Breakdown</h3>
-        <table class="proposal-table">
+        <section class="rounded-xl bg-pink-50/70 dark:bg-pink-950/50 shadow p-5 border border-pink-100 dark:border-pink-800">
+          <header>
+            <h3>Reasoning</h3>
+          </header>
+          <p class="text-pink-800 dark:text-pink-200">
+            {evaluation.executive_summary.reasoning}
+          </p>
+        </section>
+      </section>
+      <h2 class="text-center">Proposal Breakdown</h2>
+      <div class="not-prose overflow-x-auto rounded-xl shadow border border-stone-200 dark:border-stone-700 mb-8">
+        <table class="w-full text-left border-collapse">
           <thead>
-            <tr>
-              <th>ID</th>
-              <th>Strengths</th>
-              <th>Weaknesses</th>
-              <th>Compliance Issues</th>
-              <th>Durability (years)</th>
-              <th>Estimated Cost</th>
-              <th>Notes</th>
+            <tr class="bg-stone-200 dark:bg-stone-800">
+              <th class="px-4 py-3 font-bold">ID</th>
+              <th class="px-4 py-3 font-bold">Strengths</th>
+              <th class="px-4 py-3 font-bold">Weaknesses</th>
+              <th class="px-4 py-3 font-bold">Compliance</th>
+              <th class="px-4 py-3 font-bold">
+                Durability
+                <br />
+                (years)
+              </th>
+              <th class="px-4 py-3 font-bold">Estimated Cost</th>
+              <th class="px-4 py-3 font-bold">Notes</th>
             </tr>
           </thead>
           <tbody>
             {evaluation.deep_dive_results.proposals.map((p) => (
-              <tr>
-                <td>{p.id}</td>
-                <td>{p.strengths.join(", ")}</td>
-                <td>{p.weaknesses.join(", ")}</td>
-                <td>{p.compliance_issues?.join(", ") ?? "—"}</td>
-                <td>{p.estimated_durability_years ?? "—"}</td>
-                <td>
+              <tr class="even:bg-stone-100 dark:even:bg-stone-900 hover:bg-pink-50 dark:hover:bg-pink-950 transition">
+                <td class="px-4 py-3">{p.id}</td>
+                <td class="px-4 py-3">{p.strengths.join(", ")}</td>
+                <td class="px-4 py-3">{p.weaknesses.join(", ")}</td>
+                <td class="px-4 py-3">
+                  {p.compliance_issues?.join(", ") ?? "—"}
+                </td>
+                <td class="px-4 py-3">{p.estimated_durability_years ?? "—"}</td>
+                <td class="px-4 py-3">
                   {p.expected_total_cost !== null &&
                   p.expected_total_cost !== undefined
-                    ? `$${p.expected_total_cost}`
+                    ? `$${p.expected_total_cost.toLocaleString()}`
                     : "—"}
                 </td>
-                <td>{p.notes}</td>
+                <td class="px-4 py-3">{p.notes ?? "—"}</td>
               </tr>
             ))}
           </tbody>
         </table>
-      </>
-    ) : (
-      <p>
-        No evaluation available. Make sure you provided a valid project name,
-        store ID, and language in the URL.
-      </p>
-    )
-  }
-</section>
+      </div>
+    </article>
+  )
+}

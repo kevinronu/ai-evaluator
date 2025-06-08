@@ -1,0 +1,61 @@
+{
+  "executive_summary": {
+    "best_proposal_id": "RCI157",
+    "project_type": "Puente vehicular elevado",
+    "summary": "La propuesta RCI157 del Consorcio Infraestructura Andina es la más técnica y normativamente adecuada para el proyecto 'Nueva Esperanza'. Destaca por su mayor capacidad estructural, cumplimiento ambiental, diseño integral y tecnología moderna, a pesar de su mayor costo. La solución garantiza mayor durabilidad, seguridad y alineación con las necesidades futuras de la zona.",
+    "top_candidates": ["RCI157", "RCI175"],
+    "total_proposals_evaluated": 2,
+    "reasoning": "La propuesta RCI157 ofrece un puente de mayor longitud (115 m), ancho (10 m), capacidad de carga (40 toneladas), estructura metálica Warren Truss (acero ASTM A709 Gr. 50), losas postensadas, rampas de concreto armado, drenaje avanzado, alumbrado LED solar, cámaras de alta seguridad, y gestión ambiental conforme a normativas. Además, su proyección de impacto social y beneficios urbanos es claramente superior. RCI175 se queda corta en alcance, capacidad, especificaciones técnicas y cumplimiento ambiental, por lo que no satisface plenamente los requerimientos estratégicos del proyecto."
+  },
+  "deep_dive_results": {
+    "proposals": [
+      {
+        "id": "RCI157",
+        "strengths": [
+          "Mayor capacidad de carga vial (40 toneladas)",
+          "Estructura metálica avanzada tipo Warren Truss; uso de acero de alta especificación",
+          "Longitud y ancho superiores, apto para tránsito pesado y emergencias",
+          "Luminarias LED con paneles solares y cámaras de videovigilancia profesional",
+          "Gestión ambiental con licencia vigente y plan de residuos",
+          "Rampas de acceso de concreto armado y drenaje pluvial avanzado",
+          "Beneficios esperados en reducción de accidentes y dinamización económica regional",
+          "Estudios preliminares completos (topografía, geotecnia, hidrología)"
+        ],
+        "weaknesses": [
+          "Costo significativamente mayor respecto a alternativas",
+          "Tiempo de ejecución ligeramente superior (8 meses)",
+          "Exige maquinaria pesada y personal especializado, lo que puede limitar proveedores locales"
+        ],
+        "compliance_issues": null,
+        "estimated_durability_years": 50,
+        "expected_total_cost": 9160000,
+        "notes": "Propuesta alineada a normas AASHTO LRFD y regulaciones peruanas. Incluye participación comunitaria y estrictos planes de mitigación ambiental y social, asegurando sostenibilidad y aceptación social. Modalidad: suma alzada."
+      },
+      {
+        "id": "RCI175",
+        "strengths": [
+          "Menor costo de ejecución",
+          "Plazo de obra más corto (7 meses)",
+          "Aplicable para tránsito local y ligero",
+          "Posibilidad de futura ampliación"
+        ],
+        "weaknesses": [
+          "Menor capacidad estructural (sólo 6 m de ancho y capacidad sin especificar para tránsito pesado)",
+          "Materiales y acabados de menor durabilidad (acero A36, concreto pobre, iluminación de sodio)",
+          "Gestión ambiental incompleta (licencia en trámite, manejo de residuos no técnico)",
+          "No integración de tecnología moderna (iluminación básica, cámaras domésticas)",
+          "No se contempla plan de comunicación comunitaria ni estudios de impacto acústico",
+          "Drenaje y rampas de especificaciones simples, posibles riesgos ante lluvias"
+        ],
+        "compliance_issues": [
+          "Declaración de Impacto Ambiental aún en trámite",
+          "Manejo de residuos sin disposición técnica registrada",
+          "No evidencia clara de cumplimiento de normativa vial o estructural para tránsito de alto tonelaje"
+        ],
+        "estimated_durability_years": 20,
+        "expected_total_cost": 5435000,
+        "notes": "Modalidad a precios unitarios, enfoque económico sobre técnico. Solución parcial, sólo para tránsito ligero. No cubre necesidades estratégicas futuras de la región."
+      }
+    ]
+  }
+}
