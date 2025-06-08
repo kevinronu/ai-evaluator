@@ -1,32 +1,32 @@
 ---
-// import { getEvaluation } from "../lib/openai/evaluation";
-// import type { Evaluation } from "../lib/openai/structured-output";
-
-// const referer = Astro.request.headers.get("Referer");
-
-// let evaluation: Evaluation | null = null;
-
-// if (referer) {
-//   const url = new URL(referer);
-//   const projectName = url.searchParams.get("projectName");
-//   const storeID = url.searchParams.get("storeID");
-//   const language = url.searchParams.get("language");
-
-//   if (projectName && storeID && language) {
-//     try {
-//       evaluation = await getEvaluation(projectName, storeID, language);
-//     } catch (error) {
-//       console.error("Evaluation fetch error:", error);
-//     }
-//   }
-// }
-
-// export const prerender = false;
-
-import evaluationData from "./r.json";
+import { getEvaluation } from "../lib/openai/evaluation";
 import type { Evaluation } from "../lib/openai/structured-output";
 
-const evaluation: Evaluation = evaluationData;
+const referer = Astro.request.headers.get("Referer");
+
+let evaluation: Evaluation | null = null;
+
+if (referer) {
+  const url = new URL(referer);
+  const projectName = url.searchParams.get("projectName");
+  const storeID = url.searchParams.get("storeID");
+  const language = url.searchParams.get("language");
+
+  if (projectName && storeID && language) {
+    try {
+      evaluation = await getEvaluation(projectName, storeID, language);
+    } catch (error) {
+      console.error("Evaluation fetch error:", error);
+    }
+  }
+}
+
+export const prerender = false;
+
+// import evaluationData from "./r.json";
+// import type { Evaluation } from "../lib/openai/structured-output";
+
+// const evaluation: Evaluation = evaluationData;
 ---
 
 {
