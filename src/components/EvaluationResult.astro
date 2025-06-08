@@ -1,0 +1,95 @@
+---
+import { getEvaluation } from "../lib/openai/evaluation";
+import type { Evaluation } from "../lib/openai/structured-output";
+
+const referer = Astro.request.headers.get("Referer");
+
+let evaluation: Evaluation | null = null;
+
+if (referer) {
+  const url = new URL(referer);
+  const projectName = url.searchParams.get("projectName");
+  const storeID = url.searchParams.get("storeID");
+  const language = url.searchParams.get("language");
+
+  if (projectName && storeID && language) {
+    try {
+      evaluation = await getEvaluation(projectName, storeID, language);
+    } catch (error) {
+      console.error("Evaluation fetch error:", error);
+    }
+  }
+}
+
+export const prerender = false;
+---
+
+<section class="evaluation-result">
+  {
+    evaluation ? (
+      <>
+        <h2>Executive Summary</h2>
+        <p>
+          <strong>Best Proposal:</strong>{" "}
+          {evaluation.executive_summary.best_proposal_id}
+        </p>
+        <p>
+          <strong>Project Type:</strong>{" "}
+          {evaluation.executive_summary.project_type}
+        </p>
+        <p>
+          <strong>Summary:</strong> {evaluation.executive_summary.summary}
+        </p>
+        <p>
+          <strong>Reasoning:</strong> {evaluation.executive_summary.reasoning}
+        </p>
+        <p>
+          <strong>Top Candidates:</strong>{" "}
+          {evaluation.executive_summary.top_candidates.join(", ")}
+        </p>
+        <p>
+          <strong>Total Evaluated:</strong>{" "}
+          {evaluation.executive_summary.total_proposals_evaluated}
+        </p>
+
+        <h3>Proposal Breakdown</h3>
+        <table class="proposal-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Strengths</th>
+              <th>Weaknesses</th>
+              <th>Compliance Issues</th>
+              <th>Durability (years)</th>
+              <th>Estimated Cost</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {evaluation.deep_dive_results.proposals.map((p) => (
+              <tr>
+                <td>{p.id}</td>
+                <td>{p.strengths.join(", ")}</td>
+                <td>{p.weaknesses.join(", ")}</td>
+                <td>{p.compliance_issues?.join(", ") ?? "—"}</td>
+                <td>{p.estimated_durability_years ?? "—"}</td>
+                <td>
+                  {p.expected_total_cost !== null &&
+                  p.expected_total_cost !== undefined
+                    ? `$${p.expected_total_cost}`
+                    : "—"}
+                </td>
+                <td>{p.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    ) : (
+      <p>
+        No evaluation available. Make sure you provided a valid project name,
+        store ID, and language in the URL.
+      </p>
+    )
+  }
+</section>

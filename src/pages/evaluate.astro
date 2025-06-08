@@ -1,0 +1,9 @@
+---
+import EvaluationResult from "../components/EvaluationResult.astro";
+---
+
+<section class="evaluator-section">
+  <output class="evaluator-result" aria-live="polite">
+    <EvaluationResult server:defer />
+  </output>
+</section>
