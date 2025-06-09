@@ -7,22 +7,22 @@ import Layout from "../layouts/Layout.astro";
     <article
       class="prose dark:prose-invert prose-headings:text-pink-600 prose-a:text-blue-600 mx-auto mb-4"
     >
-      <h2 class="text-center">Demo: Compare Real Proposals</h2>
+      <h2 class="text-center">Demo: Evaluate Real Proposals</h2>
       <p class="text-center">
         Preview two sample proposals below.<br />
-        Click “Start Comparison” to see how the AI evaluation works.
+        Click “Start Evaluation” to see how the AI evaluation works.
       </p>
     </article>
 
     <section
       aria-label="Sample Proposals Preview"
-      class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"
+      class="grid grid-cols-2 gap-4 mb-8"
     >
       <figure
         class="rounded-2xl shadow-lg border border-stone-200 dark:border-stone-700"
       >
         <figcaption class="text-center">Proposal A</figcaption>
-        <div class="w-full aspect-[6/5]">
+        <div class="w-full aspect-[5/3] md:aspect-[6/5]">
           <embed
             src="/proposal-A.pdf"
             type="application/pdf"
@@ -43,7 +43,7 @@ import Layout from "../layouts/Layout.astro";
         class="rounded-2xl shadow-lg border border-stone-200 dark:border-stone-700"
       >
         <figcaption class="text-center">Proposal B</figcaption>
-        <div class="w-full aspect-[6/5]">
+        <div class="w-full aspect-[5/3] md:aspect-[6/5]">
           <embed
             src="/proposal-B.pdf"
             type="application/pdf"
@@ -66,7 +66,7 @@ import Layout from "../layouts/Layout.astro";
         href={`/evaluate?projectName=Nueva%20Esperanza&storeID=vs_684667bd37948191a43e1b9ea379c3d5&language=English`}
         class="px-4 py-2 rounded-2xl bg-pink-500 hover:bg-pink-600 text-white shadow-lg transition active:scale-95"
       >
-        Start Comparison
+        Start Evaluation
       </a>
     </div>
   </main>
