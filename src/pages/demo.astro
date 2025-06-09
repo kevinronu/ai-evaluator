@@ -26,8 +26,16 @@ import Layout from "../layouts/Layout.astro";
           <embed
             src="/proposal-A.pdf"
             type="application/pdf"
-            class="w-full h-full"
+            class="hidden md:block w-full h-full"
           />
+          <a
+            href="/proposal-A.pdf"
+            target="_blank"
+            rel="noopener"
+            class="md:hidden block text-pink-500 underline font-semibold py-8"
+          >
+            View Proposal A (PDF)
+          </a>
         </div>
       </figure>
       <figure
@@ -38,8 +46,16 @@ import Layout from "../layouts/Layout.astro";
           <embed
             src="/proposal-B.pdf"
             type="application/pdf"
-            class="w-full h-full"
+            class="hidden md:block w-full h-full"
           />
+          <a
+            href="/proposal-B.pdf"
+            target="_blank"
+            rel="noopener"
+            class="md:hidden block text-pink-500 underline font-semibold py-8"
+          >
+            View Proposal B (PDF)
+          </a>
         </div>
       </figure>
     </section>
