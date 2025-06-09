@@ -32,7 +32,7 @@ This tool is particularly useful in public sector decision-making, where it can 
 
 1. **Clone this Repository:**
    ```shell
-   git clone git@github.com:your-username/ai-evaluator.git
+   git clone git@github.com:kevinronu/ai-evaluator.git
    cd ai-evaluator
    ```
 

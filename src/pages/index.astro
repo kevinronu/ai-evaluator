@@ -18,12 +18,9 @@ import { TOP_N } from "../lib/openai/evaluation";
             criteria.
           </li>
           <li>
-            You’ll receive a clear, structured evaluation with an executive
-            summary and a detailed breakdown for each proposal.
-          </li>
-          <li>
-            The top {TOP_N} proposals will be highlighted, making it easy to identify
-            the most competitive options at a glance.
+            You will receive a clear and structured evaluation, featuring an
+            executive summary of the top {TOP_N} highest-rated proposals, including
+            a detailed breakdown of each one.
           </li>
         </ul>
       </article>
@@ -44,6 +41,21 @@ import { TOP_N } from "../lib/openai/evaluation";
 						 placeholder:text-stone-400 dark:placeholder:text-stone-500
 						 focus:outline-none focus:ring focus:ring-blue-400 focus:rounded"
           />
+        </label>
+
+        <label class="block mb-8 font-semibold">
+          Evaluation language:
+          <select
+            name="language"
+            required
+            class="w-full mt-4 px-4 py-2 rounded-lg border border-stone-300 bg-stone-50
+      dark:border-stone-700 dark:bg-stone-800
+      placeholder:text-stone-400 dark:placeholder:text-stone-500
+      focus:outline-none focus:ring focus:ring-blue-400 focus:rounded"
+          >
+            <option value="English">English</option>
+            <option value="Spanish">Spanish</option>
+          </select>
         </label>
 
         <label class="block mb-4 font-semibold">
@@ -85,7 +97,7 @@ import { TOP_N } from "../lib/openai/evaluation";
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const { storeName, documents } = e.target;
+    const { storeName, documents, language } = e.target;
 
     const formData = new FormData();
     formData.append("storeName", storeName.value);
@@ -117,7 +129,7 @@ import { TOP_N } from "../lib/openai/evaluation";
       const params = new URLSearchParams({
         projectName: result.vector_store_name,
         storeID: result.vector_store_id,
-        language: `Spanish`,
+        language: language.value,
       });
 
       window.location.href = `/evaluate?${params.toString()}`;
