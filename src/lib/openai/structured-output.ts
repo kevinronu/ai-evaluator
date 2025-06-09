@@ -2,9 +2,9 @@ import { z } from "astro:content";
 
 export const EvaluationSchema = z.object({
   executive_summary: z.object({
-    best_proposal_id: z
+    best_proposal_company: z
       .string()
-      .describe("The identifier of the proposal selected as the best overall"),
+      .describe("The name of the company selected as having the best proposal"),
     project_type: z
       .string()
       .describe(
@@ -13,7 +13,7 @@ export const EvaluationSchema = z.object({
     summary: z.string().describe("Concise overview of the evaluation outcome"),
     top_candidates: z
       .array(z.string())
-      .describe("Identifiers of the top N proposals considered"),
+      .describe("Company names of the top N proposals considered"),
     total_proposals_evaluated: z
       .number()
       .int()
@@ -29,9 +29,9 @@ export const EvaluationSchema = z.object({
     proposals: z
       .array(
         z.object({
-          id: z
+          company_name: z
             .string()
-            .describe("Unique identifier of the evaluated proposal"),
+            .describe("Name of the company that submitted the proposal"),
           strengths: z
             .array(z.string())
             .describe("Notable strengths and positive attributes"),
