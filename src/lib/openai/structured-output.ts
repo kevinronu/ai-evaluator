@@ -8,7 +8,7 @@ export const EvaluationSchema = z.object({
     project_type: z
       .string()
       .describe(
-        "General category of the project, such as road, building, etc."
+        "General category of the project, such as road, building, etc. Capitalized."
       ),
     summary: z.string().describe("Concise overview of the evaluation outcome"),
     top_candidates: z

@@ -1,10 +1,14 @@
 ---
-import EvaluationResult from "../components/EvaluationResult.astro";
+import Evaluation from "../components/Evaluation.astro";
+import EvaluationSkeleton from "../components/EvaluationSkeleton.astro";
+
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
   <main>
-    <EvaluationResult server:defer />
+    <Evaluation server:defer>
+      <EvaluationSkeleton slot="fallback" />
+    </Evaluation>
   </main>
 </Layout>
