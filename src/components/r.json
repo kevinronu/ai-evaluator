@@ -1,16 +1,19 @@
 {
   "executive_summary": {
-    "best_proposal_id": "RCI157",
+    "best_proposal_company": "Consorcio Infraestructura Andina",
     "project_type": "Puente vehicular elevado",
     "summary": "La propuesta RCI157 del Consorcio Infraestructura Andina es la más técnica y normativamente adecuada para el proyecto 'Nueva Esperanza'. Destaca por su mayor capacidad estructural, cumplimiento ambiental, diseño integral y tecnología moderna, a pesar de su mayor costo. La solución garantiza mayor durabilidad, seguridad y alineación con las necesidades futuras de la zona.",
-    "top_candidates": ["RCI157", "RCI175"],
+    "top_candidates": [
+      "Consorcio Infraestructura Andina",
+      "Constructora Unión del Centro SAC"
+    ],
     "total_proposals_evaluated": 2,
     "reasoning": "La propuesta RCI157 ofrece un puente de mayor longitud (115 m), ancho (10 m), capacidad de carga (40 toneladas), estructura metálica Warren Truss (acero ASTM A709 Gr. 50), losas postensadas, rampas de concreto armado, drenaje avanzado, alumbrado LED solar, cámaras de alta seguridad, y gestión ambiental conforme a normativas. Además, su proyección de impacto social y beneficios urbanos es claramente superior. RCI175 se queda corta en alcance, capacidad, especificaciones técnicas y cumplimiento ambiental, por lo que no satisface plenamente los requerimientos estratégicos del proyecto."
   },
   "deep_dive_results": {
     "proposals": [
       {
-        "id": "RCI157",
+        "company_name": "Consorcio Infraestructura Andina",
         "strengths": [
           "Mayor capacidad de carga vial (40 toneladas)",
           "Estructura metálica avanzada tipo Warren Truss; uso de acero de alta especificación",
@@ -32,7 +35,7 @@
         "notes": "Propuesta alineada a normas AASHTO LRFD y regulaciones peruanas. Incluye participación comunitaria y estrictos planes de mitigación ambiental y social, asegurando sostenibilidad y aceptación social. Modalidad: suma alzada."
       },
       {
-        "id": "RCI175",
+        "company_name": "Constructora Unión del Centro SAC",
         "strengths": [
           "Menor costo de ejecución",
           "Plazo de obra más corto (7 meses)",
