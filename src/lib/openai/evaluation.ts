@@ -3,7 +3,7 @@ import { zodTextFormat } from "openai/helpers/zod";
 import { EvaluationSchema, type Evaluation } from "./structured-output";
 import { openai } from "./client";
 
-const TOP_N = 5;
+export const TOP_N = 5;
 
 export async function getEvaluation(
   projectName: string,

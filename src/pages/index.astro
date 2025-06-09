@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { TOP_N } from "../lib/openai/evaluation";
 ---
 
 <Layout>
@@ -19,6 +20,10 @@ import Layout from "../layouts/Layout.astro";
           <li>
             You’ll receive a clear, structured evaluation with an executive
             summary and a detailed breakdown for each proposal.
+          </li>
+          <li>
+            The top {TOP_N} proposals will be highlighted, making it easy to identify
+            the most competitive options at a glance.
           </li>
         </ul>
       </article>
